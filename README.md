@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Music App - 音楽検索アプリ
 
-## Getting Started
+music-play-app から Next.js 15 に移行した音楽検索アプリケーションです。
 
-First, run the development server:
+## 特徴
 
-```bash
+- **Spotify API**を使用した楽曲検索
+- **人気楽曲**の表示
+- **Next.js 15**と**React 19**を使用
+- **Server Components**中心の設計でクライアントコンポーネントを最小化
+- **コロケーション構造**でコンポーネントを整理
+- **ターミナルのみでのAPIログ出力**
+
+## 技術スタック
+
+- **Frontend**: Next.js 15, React 19, TypeScript
+- **Styling**: Tailwind CSS 4
+- **Icons**: Font Awesome
+- **API Client**: Axios
+- **Images**: Next.js Image Optimization
+
+## 環境設定
+
+1. 環境変数を設定してください：
+
+\`\`\`bash
+# .env.local
+NEXT_PUBLIC_SPOTIFY_CLIENT_ID=your_base64_encoded_client_id_here
+NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET=your_base64_encoded_client_secret_here
+\`\`\`
+
+2. 依存関係をインストール：
+
+\`\`\`bash
+npm install
+\`\`\`
+
+## 開発サーバーの起動
+
+\`\`\`bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+\`\`\`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+http://localhost:3000 でアプリケーションにアクセスできます。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ビルド
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+\`\`\`bash
+npm run build
+npm start
+\`\`\`
 
-## Learn More
+## 移行で実装された要件
 
-To learn more about Next.js, take a look at the following resources:
+1. **コロケーション構造**: 各機能のコンポーネントを `src/app/_components/` に配置
+2. **APIログのターミナル出力**: `src/lib/logging.ts` でサーバーサイドのみでログを出力
+3. **クライアントコンポーネントの最小化**: 必要最小限のコンポーネントのみ `'use client'` を使用
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ディレクトリ構造
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+\`\`\`
+src/
+├── app/
+│   ├── _components/          # ページレベルのコロケーション構造
+│   │   ├── loading-spinner.tsx
+│   │   ├── music-page-content.tsx
+│   │   ├── scroll-to-top-button.tsx
+│   │   ├── search-input.tsx
+│   │   ├── search-section.tsx
+│   │   ├── song-display-section.tsx
+│   │   └── song-list.tsx
+│   ├── layout.tsx
+│   ├── not-found.tsx
+│   └── page.tsx
+├── lib/
+│   ├── logging.ts            # ターミナル専用ログ
+│   ├── spotify-api.ts        # Spotify API関数
+│   └── spotify-token.ts      # トークン管理
+└── types/
+    └── spotify.ts            # TypeScript型定義
+\`\`\`
