@@ -17,7 +17,7 @@ export function SongList({ songs, lastElementRef }: SongListProps) {
   }
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-8">
+    <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4">
       {songs.map((song, index) => {
         // PopularSongsList と SearchSongList の型を判定
         const isPopularSong = 'track' in song;
@@ -40,7 +40,7 @@ export function SongList({ songs, lastElementRef }: SongListProps) {
               rel="noopener noreferrer"
               className="flex flex-col cursor-pointer hover:opacity-80 transition-opacity"
             >
-              <div className="relative mb-2 rounded overflow-hidden aspect-square">
+              <div className="relative mb-2 rounded overflow-hidden aspect-square scale-[0.8]">
                 {imageUrl ? (
                   <Image
                     src={imageUrl}
